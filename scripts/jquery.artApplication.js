@@ -2,6 +2,8 @@
 (function ($){
     $.fn.loadImage = function (options){
         let imageId = 0;
+        const width = $(window).width();
+        const height = $(window).height();
         imageId = selectImageIndex();
         //console.log("select image id: " + imageId);
         //getImage(imageId);
@@ -18,7 +20,7 @@
             request.done(function (data){
                 //console.log(data + 'rows');
                 imageId = Math.floor((Math.random() * data) + 1);
-                //console.log(imageId);
+                console.log(imageId);
                 getImage(imageId)
             });
             request.fail(
@@ -39,8 +41,16 @@
 
             request.done(function (data){
                 $(data["data"]).each(function (index, object) {
+                    console.log('ciaoooo '+object['name']+' '+object['year']);
                     $('.question').html(object['question']);
-                    $('.imageBox').append("<img class = 'mainImg' src = " + object['image'] + "><div class='areaToClick'></div>");
+                    let imageLink = object['lr-link'];
+                    if ((width >= 2 * object['lr-width']) && (width < 2 * object['mr-width'])){
+                        imageLink = object['mr-link'];
+                    }
+                    else if(width >= 2 * object['mr-width']){
+                        imageLink = object['hr-link'];
+                    }
+                    $('.imageBox').append("<img class = 'mainImg' src = " + imageLink + "><div class='areaToClick'></div>");
                     let coords = JSON.parse(object['coordinates']);
                     $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
                 });

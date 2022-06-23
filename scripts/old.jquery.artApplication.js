@@ -40,15 +40,16 @@
                 console.log("done: " + data["infos"]);
                 let html = "";
                 $(data["infos"]).each(function (index, object){
-                    console.log(object["id"] + " " + object["name"] + " " + object["author"]);
-                    html += "<img class='mainImg'  src = "+ object['image'] + "><div class='areaToClick'></div>";
-                });
-                $('.imageBox').append($(html));
-                $('.areaToClick').on('click', function (event) {
-                    $('.areaToClick').css({'border': '3px solid green'});
-                    alert("Complimenti! Hai indovinato!");
+                    console.log('ciaoooo '+object['name']+' '+object['year']);
+                        console.log(object["id"] + " " + object["name"] + " " + object["author"]);
+                        html += "<img class='mainImg'  src = "+ object['image'] + "><div class='areaToClick'></div>";
+                    });
+                    $('.imageBox').append($(html));
+                    $('.areaToClick').on('click', function (event) {
+                        $('.areaToClick').css({'border': '3px solid green'});
+                        alert("Complimenti! Hai indovinato!");
+                    });
 
-                });
             });
 
             request.fail(

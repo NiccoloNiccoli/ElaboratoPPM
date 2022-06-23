@@ -40,7 +40,7 @@
 		break;
 
 		case "count":
-		    countRows();
+		    countQuestions();
 		break;
 	}
 	
@@ -170,7 +170,7 @@
 	}
 
 	function getImage($img_id){
-        $query_string = 'SELECT * FROM art_infos WHERE id = '.$img_id;
+        $query_string = 'SELECT * FROM art_infos NATURAL JOIN art_images WHERE id = '.$img_id;
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
         // esegui la query
@@ -195,14 +195,14 @@
         // encodo l'array in JSON
         echo json_encode($response);*/
         if($row = $result->fetch_array(MYSQLI_ASSOC)){
-        $output = array('id' => $row['id'], 'name' => $row['name'], 'author' => $row['author'], 'image' => $row['image'], 'coordinates' => $row['coordinates']);
-        $response = array('data' => $output, 'type' => 'get');
+            $output = array('id' => $row['id'], 'name' => $row['name'], 'author' => $row['author'], 'description' => $row['description'], 'coordinates' => $row['coordinates'],'question' => $row['question'], 'location' => $row['location'], 'year' => $row['year'], 'lr-link' => $row['low-res_link'], 'lr-width' => $row['low-res_width'],'mr-link' => $row['mid-res_link'], 'mr-width' => $row['mid-res_width'], 'hr-link' => $row['high-res_link'], 'hr-width' => $row['high-res_width']);
+            $response = array('data' => $output, 'type' => 'get');
         }
         echo json_encode($response);
 
 	}
 
-	function countRows(){
+	function countQuestions(){
         $query_string = 'SELECT COUNT(*) as c FROM art_infos';
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
         $result = $mysqli->query($query_string);
