@@ -1,10 +1,12 @@
 .mainImg{
-    max-width: 50%;
+    max-width: 45%;
 }
+
 .imageBox{
     position: relative;
-    width: 100%;
+    width: 50%;
 }
+
 .areaToClick{
     width: 60px;
     height: 90px;
@@ -13,10 +15,12 @@
     left: 4%;
     position: absolute;
 }
+
 html{
     font-size: 100%;
     font-family: sans-serif;
 }
+
 body{
     margin: 0;
     padding: 0;
@@ -25,28 +29,29 @@ body{
 .mainContent{
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
+
+.question{
+  background-color: gray;
+  margin: 0 10px 0 10px;
+}
+
+.players{
+  display: flex;
+}
+
 #player1, #player2{
-    height: 50vh;
+    width: 50%;
+    flex-direction: column;
 }
+
 #player1{
-    transform: rotate(180deg);
     background-color: hotpink;
-    height: 50vh;
 }
+
 #player2{
-    position: relative;
     background-color: cyan;
 }
-.header{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    margin: 0 10px 0 10px;
 
-}
 .pointsCounter{
 }
