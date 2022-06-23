@@ -1,0 +1,52 @@
+.mainImg{
+    max-width: 50%;
+}
+.imageBox{
+    position: relative;
+    width: 100%;
+}
+.areaToClick{
+    width: 60px;
+    height: 90px;
+    /*border: 1px solid yellow;*/
+    top: 50%;
+    left: 4%;
+    position: absolute;
+}
+html{
+    font-size: 100%;
+    font-family: sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#player1, #player2{
+    height: 50vh;
+}
+#player1{
+    transform: rotate(180deg);
+    background-color: hotpink;
+    height: 50vh;
+}
+#player2{
+    position: relative;
+    background-color: cyan;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 0 10px 0 10px;
+
+}
+.pointsCounter{
+}
