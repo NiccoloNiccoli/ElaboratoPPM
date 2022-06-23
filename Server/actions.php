@@ -195,7 +195,7 @@
         // encodo l'array in JSON
         echo json_encode($response);*/
         if($row = $result->fetch_array(MYSQLI_ASSOC)){
-        $output = array('id' => $row['id'], 'name' => $row['name'], 'author' => $row['author'], 'image' => $row['image']);
+        $output = array('id' => $row['id'], 'name' => $row['name'], 'author' => $row['author'], 'image' => $row['image'], 'coordinates' => $row['coordinates']);
         $response = array('data' => $output, 'type' => 'get');
         }
         echo json_encode($response);

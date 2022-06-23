@@ -38,7 +38,17 @@
             });
 
             request.done(function (data){
-                console.log('ciao');
+                $(data["data"]).each(function (index, object) {
+                    $('.question').html(object['question']);
+                    $('.imageBox').append("<img class = 'mainImg' src = " + object['image'] + "><div class='areaToClick'></div>");
+                    let coords = JSON.parse(object['coordinates']);
+                    $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
+                });
+                $('.areaToClick').on('click', function (event) {
+                    $('.areaToClick').css({'border': '3px solid green'});
+                    alert("Complimenti! Hai indovinato!");
+
+                });
             });
             request.fail(
                 function(jqXHR, textStatus) {
