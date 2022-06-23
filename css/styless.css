@@ -1,0 +1,50 @@
+html{
+    font-size: 90%;
+    font-family: sans-serif;
+}
+
+.splashScreen{
+  display: flex;
+  flex-direction: column;
+}
+
+.gameName{
+  text-align: center;
+  margin-top: 2%;
+}
+
+.playersNames{
+  display: flex;
+}
+
+.playerName{
+  flex-direction: column;
+  margin: auto;
+}
+
+.playerName,
+.rounds,
+.timer,
+.button{
+  text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: auto;
+  width: 25%;
+}
+
+.gameName,
+.playersNames,
+.rounds,
+.timer,
+.button{
+  margin-bottom: 4.5%;
+}
