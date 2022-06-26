@@ -8,6 +8,7 @@
   <link href="css/styless.css" rel="stylesheet" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="scripts/saveSettings.js"></script>
 
 </head>
 <body>
@@ -17,34 +18,30 @@
     </div>
     <div class="playersNames">
       <div class="playerName">
-        <form action="/action_page.php">
-          <label for="player1">Giocatore 1:</label>
-          <input type="text" class="inputName"><br><br>
-        </form>
+          <label for="name1">Giocatore 1:</label>
+          <input type="text" id="name1"><br><br>
       </div>
       <div class="playerName">
-        <form action="/action_page.php">
-          <label for="player2">Giocatore 2:</label>
-          <input type="text" class="inputName"><br><br>
-        </form>
+          <label for="name2">Giocatore 2:</label>
+          <input type="text" id="name2"><br><br>
       </div>
     </div>
-    <div class="rounds">
-      <label for="roundsNumber">Numero di rounds:</label>
-      <select>
-        <option value="select your option" disabled selected></option>
+    <div id="rounds">
+      <label for="selection">Numero di rounds:</label>
+      <select id="selection">
+        <option value="select your option" disabled selected> </option>
         <option value="3">3</option>
         <option value="5">5</option>
         <option value="7">7</option>
         <option value="9">9</option>
       </select>
     </div>
-    <div class="timer">
-      <input type="checkbox" name="timer" unchecked>
+    <div class="timer_checkbox">
+      <input type="checkbox" id="timer" name="timer">
       <label for="timer">A tempo (20 secondi per domanda)</label>
     </div>
-    <a href="mainPage.html">
-      <button class="button" name="play">Gioca!</button>
+    <a id="play_link" href="">
+      <button id="play_button" name="play">Gioca!</button>
     </a>
   </div>
 </body>
