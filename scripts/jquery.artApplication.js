@@ -3,35 +3,13 @@
     $.fn.loadImage = function (options){
         let imageId = 0;
         const width = $(window).width();
-        const height = $(window).height();
-        imageId = selectImageIndex();
-        //console.log("select image id: " + imageId);
-        //getImage(imageId);
 
-        function selectImageIndex(){
-            let request_type = 'count';
-            let request = $.ajax({
-                url: options.serverURL,
-                type: "POST",
-                data: {"action" : request_type},
-                dataTypes: "json",
-            });
-            imageId = -1;
-            request.done(function (data){
-                //console.log(data + 'rows');
-                imageId = Math.floor((Math.random() * data) + 1);
-                console.log(imageId);
-                getImage(imageId)
-            });
-            request.fail(
-                function(jqXHR, textStatus) {
-                    alert( "Request failed: " + textStatus );
-                });
-            return imageId;
-        }
-
-        function getImage(id) {
+        getImage()
+        function getImage() {
             let request_type = 'get';
+            let questions = JSON.parse(localStorage.getItem("questionsIDs"));
+            let id = questions.pop();
+            localStorage.setItem("questionsIDs", JSON.stringify(questions));
             let request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
