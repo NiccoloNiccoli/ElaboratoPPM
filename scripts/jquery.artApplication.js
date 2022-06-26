@@ -53,10 +53,15 @@
                     $('.imageBox').append("<img class = 'mainImg' src = " + imageLink + "><div class='areaToClick'></div>");
                     let coords = JSON.parse(object['coordinates']);
                     $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
+                    const dataDesc = {"name" : object['name'], "author" : object['author'], "location" : object['location'], "year" : object['year'], "description" : object["description"], "image" : imageLink};
+                    localStorage.setItem("desc", JSON.stringify(dataDesc));
                 });
                 $('.areaToClick').on('click', function (event) {
                     $('.areaToClick').css({'border': '3px solid green'});
-                    alert("Complimenti! Hai indovinato!");
+                    setTimeout(function(){
+                        window.location = "descriptionPage.html";
+                    }, 2000);
+
 
                 });
             });
@@ -66,8 +71,5 @@
                 });
         }
     }
-
-
-
 
 })(jQuery);
