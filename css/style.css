@@ -1,3 +1,71 @@
+html{
+    font-size: 90%;
+    font-family: sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/*index.html*/
+
+.splashScreen{
+    display: flex;
+    flex-direction: column;
+}
+
+.gameName{
+    text-align: center;
+    margin-top: 2%;
+}
+
+.playersNames{
+    display: flex;
+}
+
+.playerName{
+    flex-direction: column;
+    margin: auto;
+}
+
+.playerName,
+#rounds,
+.timer_checkbox,
+#play_button,
+#nextRound_button{
+    text-align: center;
+}
+
+#play_button,
+#nextRound_button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    width: 25%;
+}
+
+#play_button{
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%;
+}
+
+.gameName,
+.playersNames,
+#rounds,
+.timer_checkbox,
+#play_button,
+#nextRound_button{
+    margin-bottom: 4.5%;
+}
+
+/*mainPage.html*/
 .mainImg{
   width: 100%;
 }
@@ -13,16 +81,6 @@
     top: 50%;
     left: 4%;
     position: absolute;
-}
-
-html{
-    font-size: 90%;
-    font-family: sans-serif;
-}
-
-body{
-    margin: 0;
-    padding: 0;
 }
 
 .mainContent{
@@ -53,5 +111,8 @@ body{
     background-color: cyan;
 }
 
-.pointsCounter{
+#paginaFinale {
+    background-color: yellow;
 }
+
+

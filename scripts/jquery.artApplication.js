@@ -20,6 +20,7 @@
             request.done(function (data){
                 $(data["data"]).each(function (index, object) {
                     console.log('ciaoooo '+object['name']+' '+object['year']);
+
                     $('.question').html(object['question']);
                     let imageLink = object['lr-link'];
                     if ((width >= 2 * object['lr-width']) && (width < 2 * object['mr-width'])){
@@ -34,8 +35,43 @@
                     const dataDesc = {"name" : object['name'], "author" : object['author'], "location" : object['location'], "year" : object['year'], "description" : object["description"], "image" : imageLink};
                     localStorage.setItem("desc", JSON.stringify(dataDesc));
                 });
+
+                let counter1 = parseInt(localStorage.getItem("count1"));
+                if(isNaN(counter1)) {
+                    counter1 = 0;
+                }
+                document.getElementById("points1").innerHTML = counter1.toString();
+
+                let counter2 = parseInt(localStorage.getItem("count2"));
+                if(isNaN(counter2)) {
+                    counter2 = 0;
+                }
+                document.getElementById("points2").innerHTML = counter2.toString();
+
                 $('.areaToClick').on('click', function (event) {
                     $('.areaToClick').css({'border': '3px solid green'});
+                    let cursorX = event.pageX;
+                    if (cursorX < window.innerWidth / 2){
+                        let c1 = parseInt(localStorage.getItem("count1"));
+                        if(isNaN(c1)) {
+                            c1 = 0;
+                        }
+                        c1++;
+                        localStorage.setItem("count1", c1.toString());
+                        document.getElementById("points1").innerHTML = c1.toString();
+                        }
+                    else {
+                        let c2 = parseInt(localStorage.getItem("count2"));
+                        if(isNaN(c2)) {
+                            c2 = 0;
+                        }
+                        c2++;
+                        localStorage.setItem("count2", c2.toString());
+                        document.getElementById("points2").innerHTML = c2.toString();
+                    }
+
+
+
                     setTimeout(function(){
                         window.location = "descriptionPage.html";
                     }, 2000);

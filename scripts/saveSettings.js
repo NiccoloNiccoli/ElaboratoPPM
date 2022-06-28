@@ -7,6 +7,8 @@ $(document).ready(function(){
         localStorage.setItem("player2", player2);
         let rounds = document.getElementById("selection").value;
         localStorage.setItem("rounds", rounds);
+        localStorage.setItem("count1", "NaN");
+        localStorage.setItem("count2", "NaN");
         let timer = document.getElementById("timer").checked;
         localStorage.setItem("timer", timer);
         if(document.getElementById("name1").value.length == 0 || document.getElementById("name2").value.length == 0){
