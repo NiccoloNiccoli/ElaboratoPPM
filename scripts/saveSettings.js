@@ -1,5 +1,5 @@
-
 $(document).ready(function(){
+    localStorage.clear();
     $("#play_button").click(function(){
         let player1 = document.getElementById("name1").value;
         localStorage.setItem("player1", player1);
@@ -43,8 +43,7 @@ $(document).ready(function(){
         }
 
         getQuestionsNumber().then((questionsNumber)=>{
-            const PLACEHOLDER_n_rounds = 2; //TODO get number of rounds from ????
-            let selectedQuestions = [...Array(questionsNumber).keys()].map( i => i+1).sort(() => 0.5 - Math.random()).slice(0, PLACEHOLDER_n_rounds);
+            let selectedQuestions = [...Array(questionsNumber).keys()].map( i => i+1).sort(() => 0.5 - Math.random()).slice(0, rounds);
             console.log(selectedQuestions);
             localStorage.setItem("questionsIDs", JSON.stringify(selectedQuestions));
         }).catch((error)=>{
