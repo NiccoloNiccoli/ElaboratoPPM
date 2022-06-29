@@ -39,7 +39,9 @@ body{
 }
 
 #play_button,
-#nextRound_button{
+#nextRound_button,
+#playAgain_button,
+#return_button{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -173,6 +175,15 @@ body{
 /* finalPage.html */
 #paginaFinale {
     background-color: yellow;
+}
+
+.buttons{
+    display: flex;
+}
+
+#playAgain_button,
+#return_button{
+    flex-direction: column;
 }
 
 
