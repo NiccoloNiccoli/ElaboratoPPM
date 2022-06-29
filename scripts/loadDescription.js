@@ -11,7 +11,6 @@ $(document).ready(function(){
    $('#year').html(infos['year']);
    if (rounds !== 0) {
       document.getElementById("nextRound_link").href="mainPage.html";
-      alert("Al prossimo round!");
    }
    else{
       document.getElementById("nextRound_link").href="finalPage.html";
