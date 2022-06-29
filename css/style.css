@@ -173,17 +173,19 @@ body{
     overflow: auto;
 }
 /* finalPage.html */
-#paginaFinale {
-    background-color: yellow;
+.finalPage{
+    display: flex;
+    flex-direction: column;
 }
 
 .buttons{
     display: flex;
 }
 
-#playAgain_button,
-#return_button{
+.button1,
+.button2{
     flex-direction: column;
+    margin: auto;
 }
 
 

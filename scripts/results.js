@@ -5,7 +5,7 @@ $(document).ready(function(){
     }
     let counter2 = parseInt(localStorage.getItem("count2"));
     if(isNaN(counter2)) {
-        counter1 = 0;
+        counter2 = 0;
     }
     if(counter1>counter2){
         document.getElementById("winner").innerHTML = "CONGRATULAZONI " + localStorage.getItem("player1") + " HAI VINTO!";
