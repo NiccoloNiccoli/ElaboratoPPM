@@ -36,7 +36,7 @@
                         $('#imgP2').append("<img class = 'mainImg' src = " + imageLink + "><div class='areaToClick' id='areaP2'></div>");
                         setTimeout(resolve, ms);
                     })
-                    loadImagesAndWait(150).then(()=>{
+                    loadImagesAndWait(250).then(()=>{
                         const imgDivWidth = $('.imageBox').width();
                         const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height();
                         console.log($('.mainImg').width(), $('.mainImg').height());

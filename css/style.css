@@ -178,6 +178,12 @@ body{
     flex-direction: column;
 }
 
+#winner{
+    background-color: aquamarine;
+    margin: 15% auto;
+    text-align: center;
+}
+
 .buttons{
     display: flex;
 }

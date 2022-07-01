@@ -7,13 +7,47 @@ $(document).ready(function(){
     if(isNaN(counter2)) {
         counter2 = 0;
     }
-    if(counter1>counter2){
-        document.getElementById("winner").innerHTML = "CONGRATULAZONI " + localStorage.getItem("player1") + " HAI VINTO!";
+    if(counter1 === counter2){
+        document.getElementById("winner").innerHTML = "PAREGGIO!";
     }
     else if (counter2>counter1){
         document.getElementById("winner").innerHTML = "CONGRATULAZONI " + localStorage.getItem("player2") + " HAI VINTO!";
     }
-    else if(counter1 === counter2){
-         document.getElementById("winner").innerHTML = "PAREGGIO!";
+    else if(counter1>counter2){
+        document.getElementById("winner").innerHTML = "CONGRATULAZONI " + localStorage.getItem("player1") + " HAI VINTO!";
     }
+    
+    $("#playAgain_button").click(function () {
+        localStorage.setItem("rounds", localStorage.getItem("selectedRounds"));
+        let rounds = localStorage.getItem("rounds");
+        getQuestionsNumber().then((questionsNumber)=>{
+            let selectedQuestions = [...Array(questionsNumber).keys()].map( i => i+1).sort(() => 0.5 - Math.random()).slice(0, rounds);
+            console.log(selectedQuestions);
+            localStorage.setItem("questionsIDs", JSON.stringify(selectedQuestions));
+            window.location = "mainPage.html";
+            localStorage.setItem("count1", "NaN");
+            localStorage.setItem("count2", "NaN");
+        }).catch((error)=>{
+            alert(error);
+        });
+
+        function getQuestionsNumber() {
+            return new Promise((resolve, reject)=>{
+                let request = $.ajax({
+                    url: "server/actions.php",
+                    type: "POST",
+                    data: {"action" : 'count'},
+                    dataTypes: "json",
+                });
+                request.done(function (data){
+                    console.log(data);
+                    resolve(parseInt(data));
+                });
+                request.fail(
+                    function(jqXHR, textStatus) {
+                        reject("Request failed: " + textStatus );
+                    });
+            });
+        }
+    });
 });
