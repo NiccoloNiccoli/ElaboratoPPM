@@ -1,39 +1,12 @@
 <?php
-	/* REQUIRE DB
-		CREATE TABLE to_do (
-  			id int(11) NOT NULL AUTO_INCREMENT,
-  			text text NOT NULL,
-  			completed tinyint(255) NOT NULL DEFAULT '0',
-  			date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  			PRIMARY KEY (id)
-		) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=109 ;
-	*/
-	
-	/* setta il formato di risposta */
 	header('Content-Type: text/json');
 	require_once("config.php");
 
 	$action = $_POST['action'];
-	
-	/* conterrà la stringa di query al database */
+
 	$query_string = "";
-	
-	/* smista secondo il tipo di richiesta */
+
 	switch($action) {
-		
-		case "load" : 
-			loadData();
-		break;
-		case "insert" :
-			//echo($action);
-			insertData();
-		break; 
-		case "update" :
-	   		updateData();
-		break;
-		case "delete" :
-			deleteData();
-		break;
 		case "get" :
 			$image_id = $_POST['imageId'];
 		    getImage($image_id);
@@ -42,158 +15,18 @@
 		case "count":
 		    countQuestions();
 		break;
-	}
-	
-	function loadData() {
-		$query_string = 'SELECT * FROM to_do ORDER BY date DESC'; 
-		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
-	
-    	// esegui la query
-		$result = $mysqli->query($query_string); 
-	
-    	$todos = array();	
-    
-    	// cicla sul risultato
-		while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-		
-			$todo_id = $row['id'];
-			$todo_text = $row['text'];
-			$to_do_completed = $row['completed'];
-			$todo_date = $row['date'];
-  
-			$todo = array('id' => $todo_id,'text' =>$todo_text, 'completed' => $to_do_completed, 'date' => $todo_date);
-			array_push($todos, $todo);
-		}
-	
-    	$response = array('todos' => $todos, 'type' => 'load');
 
-		// encodo l'array in JSON
-		echo json_encode($response);	
-	
-}
-	
-	function insertData() {
-		
-		if (isset($_POST['text'])) {
-			$to_do_text = $_POST['text'];
-		} else {
-			echo "you didn't specify a text";
-			return;
-		}
-		
-		$query_string = "INSERT INTO to_do (text) values ('". htmlspecialchars($to_do_text) . "')";
-		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
-	
-    	// esegui la query per inserire il to do nel db
-		$result = $mysqli->query($query_string); 
-	
-	
-    	$query_string = 'SELECT * FROM to_do WHERE ID=' . $mysqli->insert_id; 
-	
-		//$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
-	
-    	// esegui la query per rileggere il record inserito
-		$result = $mysqli->query($query_string); 
-	
-    	$todos = array();	
-    
-    	// cicla sul risultato
-		while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-		
-			$todo_id = $row['id'];
-  			$todo_text = $row['text'];
-			$to_do_completed = $row['completed'];
-  			$todo_date = $row['date'];
-  
-			$todo = array('id' => $todo_id,'text' =>$todo_text, 'completed' => $to_do_completed, 'date' => $todo_date);
-			array_push($todos, $todo);
-		}
-	
-    	$response = array('todos' => $todos, 'type' => 'insert');
-
-		// encodo l'array in JSON
-		echo json_encode($response);	
-	
-	}
-	
-	function updateData() {
-		if (isset($_POST['id'])) $id = $_POST['id'];
-		if (isset($_POST['status'])) $status = $_POST['status'];
-	
-		$pieces = explode("_", $id);
-	
-		$query_string = 'UPDATE to_do SET completed=' . $status . ' WHERE ID=' . $pieces[1];
-		
-		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
-	
-    	// esegui la query
-		$result = $mysqli->query($query_string); 
-	
-		//echo $query_string;
-	
-    	if($mysqli->affected_rows > 0) {
-		// encodo l'array in JSON
-
-	  		$response = array('updated' => true, 'id' => $id, 'type' => 'update');
-		
-		} else {
-	  		$response = array('updated' => false, 'id' => $id, 'type' => 'update');	
-		}
-	
-	echo json_encode($response);
-	
-}
-
-	
-	function deleteData() {
-		
-		if (isset($_POST['id'])) $id = $_POST['id'];
-	
-			$pieces = explode("_", $id);
-	
-			$query_string = 'DELETE FROM to_do WHERE ID=' . $pieces[1]; 
-			
-			$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
-	
-    		// esegui la query
-			$result = $mysqli->query($query_string); 
-	
-    		if($mysqli->affected_rows > 0) {
-
-				// encodo l'array in JSON
-	  			$response = array('deleted' => true, 'id' => $id, 'type' => 'delete');
-			} else {
-	  			$response = array('deleted' => false, 'id' => $id, 'type' => 'delete');
-	  		}
-	
-			echo json_encode($response);
+		case "getAllImages":
+		    getAllImages();
+		break;
 	}
 
 	function getImage($img_id){
         $query_string = 'SELECT * FROM art_infos NATURAL JOIN art_images WHERE id = '.$img_id;
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
-        // esegui la query
         $result = $mysqli->query($query_string);
-        /*
-        $hello_world_output = array();
 
-        // cicla sul risultato
-        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-
-            $picture_id = $row['id'];
-            $picture_title = $row['name'];
-            $picture_author = $row['author'];
-            $image = $row['image'];
-
-            $infos = array('id' => $picture_id,'name' =>$picture_title, 'author' => $picture_author, 'image' => $image);
-            array_push($hello_world_output, $infos);
-        }
-
-        $response = array('infos' => $hello_world_output, 'type' => 'load');
-
-        // encodo l'array in JSON
-        echo json_encode($response);*/
         if($row = $result->fetch_array(MYSQLI_ASSOC)){
             $output = array('id' => $row['id'], 'name' => $row['name'], 'author' => $row['author'], 'description' => $row['description'], 'coordinates' => $row['coordinates'],'question' => $row['question'], 'location' => $row['location'], 'year' => $row['year'], 'lr-link' => $row['low-res_link'], 'lr-width' => $row['low-res_width'],'mr-link' => $row['mid-res_link'], 'mr-width' => $row['mid-res_width'], 'hr-link' => $row['high-res_link'], 'hr-width' => $row['high-res_width']);
             $response = array('data' => $output, 'type' => 'get');
@@ -209,5 +42,24 @@
         $row = $result->fetch_object()->c;
         echo json_encode($row);
 	}
+
+	function getAllImages(){
+            $query_string = 'SELECT `low-res_link`,`low-res_width`, `mid-res_link`,`mid-res_width`, `high-res_link`, `high-res_width` FROM art_images';
+            $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+            $result = $mysqli->query($query_string);
+
+            $output_array = array();
+
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $infos = array('lr-link' => $row['low-res_link'], 'lr-width' => $row['low-res_width'],'mr-link' => $row['mid-res_link'], 'mr-width' => $row['mid-res_width'], 'hr-link' => $row['high-res_link'], 'hr-width' => $row['high-res_width']);
+                array_push($output_array, $infos);
+            }
+
+            $response = array('data' => $output_array, 'type' => 'getAllImages');
+
+            echo json_encode($response);
+
+    	}
 
 ?>

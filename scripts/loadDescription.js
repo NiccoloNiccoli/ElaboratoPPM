@@ -15,7 +15,4 @@ $(document).ready(function(){
    else{
       document.getElementById("nextRound_link").href="finalPage.html";
    }
-   /*$('#nextRound_button').click(function () {
-
-   });*/
 });

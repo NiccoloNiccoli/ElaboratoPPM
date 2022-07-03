@@ -8,12 +8,9 @@
   <link href="css/style.css" rel="stylesheet" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="scripts/jquery.artApplication.js"></script>
   <script type="text/javascript" src="scripts/init.js"></script>
 </head>
 <body>
-<!--<div class="artApplication"></div>
-<div class="imageBox"></div>-->
 <div class = "mainContent">
   <div class="question">
     <h2>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet?</h2>
@@ -28,13 +25,19 @@
 
         <p class="pointsCounter">Punti: <span id="points1"></span></p>
       </div>
-      <div class="imageBox" id="imgP1"></div>
+      <div class="imageBox">
+        <img class='mainImg' id="imgP1" src="">
+        <div class="areaToClick" id="areaP1"></div>
+      </div>
     </div>
     <div id="player2">
       <div class="header">
         <p class="pointsCounter">Punti: <span id="points2"></span></p>
       </div>
-      <div class="imageBox" id="imgP2"></div>
+      <div class="imageBox">
+        <img class='mainImg' id="imgP2" src="">
+        <div class="areaToClick" id="areaP2"></div>
+      </div>
     </div>
   </div>
 </div>

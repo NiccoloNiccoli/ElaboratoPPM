@@ -1,5 +1,15 @@
 $(document).ready(function(){
-    localStorage.clear();
+    let isInitialized = localStorage.getItem("isInitialized");
+    if(isInitialized){
+        localStorage.clear();
+        isInitialized = true;
+    }else{
+        isInitialized = true;
+        console.log('initialized');
+        preloadAllImages();
+    }
+    localStorage.setItem("isInitialized", isInitialized);
+
     $("#play_button").click(function(){
         let player1 = document.getElementById("name1").value;
         localStorage.setItem("player1", player1);
@@ -21,6 +31,7 @@ $(document).ready(function(){
         else{
             getQuestionsNumber().then((questionsNumber)=>{
                 let selectedQuestions = [...Array(questionsNumber).keys()].map( i => i+1).sort(() => 0.5 - Math.random()).slice(0, rounds);
+
                 console.log(selectedQuestions);
                 localStorage.setItem("questionsIDs", JSON.stringify(selectedQuestions));
                 window.location = "mainPage.html";
@@ -48,4 +59,27 @@ $(document).ready(function(){
             }
         }
     });
+    function preloadAllImages() {
+        const width = $(window).width();
+
+        let request = $.ajax({
+            url: "server/actions.php",
+            type: "POST",
+            data: {"action" : "getAllImages"},
+            dataTypes: "json",
+        });
+        request.done(function (data){
+            console.log(data['data']);
+            $(data['data']).each(function (index, object) {
+                console.log('preloading '+ object['lr-link']);
+                let imageLink = object['lr-link'];
+                if ((width >= 2 * object['lr-width']) && (width < 2 * object['mr-width'])) {
+                    imageLink = object['mr-link'];
+                } else if (width >= 2 * object['mr-width']) {
+                    imageLink = object['hr-link'];
+                }
+                $('<img/>')[0].src = imageLink;
+            });
+        });
+    }
 });
