@@ -89,7 +89,7 @@ $(document).ready(function() {
 
 
             if(!haveAlreadyAnswered){
-                $('#areaP1').css({'border': '3px solid green'});
+                $('#areaP1').css({'border': '3px solid #17C3B2'});
                 let c1 = parseInt(localStorage.getItem("count1"));
                 if(isNaN(c1)) {
                     c1 = 0;
@@ -105,7 +105,7 @@ $(document).ready(function() {
         });
         $('#areaP2').on('click', function (event) {
             if(!haveAlreadyAnswered) {
-                $('#areaP2').css({'border': '3px solid green'});
+                $('#areaP2').css({'border': '3px solid #17C3B2'});
                 let c2 = parseInt(localStorage.getItem("count2"));
                 if (isNaN(c2)) {
                     c2 = 0;
