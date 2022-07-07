@@ -22,53 +22,43 @@ $(document).ready(function() {
 
 
     function loadImage(){
-        let request_type = 'get';
         let questions = JSON.parse(localStorage.getItem("questionsIDs"));
         let id = questions.pop();
         localStorage.setItem("questionsIDs", JSON.stringify(questions));
-        let request = $.ajax({
-            url: "server/actions.php",
-            type: "POST",
-            data: {"action" : request_type, "imageId" : id},
-            dataTypes: "json",
-        });
 
-        request.done(function (data){
-        $(data["data"]).each(function (index, object) {
-            console.log('ciaoooo '+object['name']+' '+object['year']);
-
-            $('.question').html(object['question']);
-            let imageLink = object['lr-link'];
-            if ((width >= 2 * object['lr-width']) && (width < 2 * object['mr-width'])){
-                imageLink = object['mr-link'];
-            }
-            else if(width >= 2 * object['mr-width']){
-                imageLink = object['hr-link'];
-            }
-
-
-            const loadImagesAndWait = ms=> new Promise(resolve => {
-                $('.mainImg').attr("src",imageLink);
-                setTimeout(resolve, ms);
-            })
-            loadImagesAndWait(65).then(()=>{
-                const imgDivWidth = $('.imageBox').width();
-                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height();
-                console.log($('.mainImg').width(), $('.mainImg').height());
-                if($('.mainImg').height() > $('.mainImg').width()){
-                    $('.mainImg').css({"height":imgDivHeight, "width":"auto"});
-                }else{
-                    $('.mainImg').css({"height":"auto", "width":imgDivWidth});
+        $.getJSON("artapplication.json", function(json) {
+            let images = json[0].data;
+            $.each(images, function (index, val){
+                $('.question').html(val['question']);
+                let imageLink = val['low-res_link'];
+                if ((width >= 2 * val['low-res_width']) && (width < 2 * val['mid-res_width'])) {
+                    imageLink = val['mid-res_link'];
+                } else if (width >= 2 * val['mid-res_width']) {
+                    imageLink = val['high-res_link'];
                 }
-                $('.imageBox').css({"height":$('.mainImg').height(), "width":$('.mainImg').width()});
 
+                const loadImagesAndWait = ms=> new Promise(resolve => {
+                    $('.mainImg').attr("src",imageLink);
+                    setTimeout(resolve, ms);
+                })
+
+                loadImagesAndWait(65).then(()=>{
+                    const imgDivWidth = $('.imageBox').width();
+                    const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height();
+                    if($('.mainImg').height() > $('.mainImg').width()){
+                        $('.mainImg').css({"height":imgDivHeight, "width":"auto"});
+                    }else{
+                        $('.mainImg').css({"height":"auto", "width":imgDivWidth});
+                    }
+                    $('.imageBox').css({"height":$('.mainImg').height(), "width":$('.mainImg').width()});
+                });
+
+                let coords = val['coordinates'];
+                $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
+                const dataDesc = {"name" : val['name'], "author" : val['author'], "location" : val['location'], "year" : val['year'], "description" : val["description"], "image" : imageLink};
+                localStorage.setItem("desc", JSON.stringify(dataDesc));
             });
 
-
-            let coords = JSON.parse(object['coordinates']);
-            $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
-            const dataDesc = {"name" : object['name'], "author" : object['author'], "location" : object['location'], "year" : object['year'], "description" : object["description"], "image" : imageLink};
-            localStorage.setItem("desc", JSON.stringify(dataDesc));
         });
 
         let counter1 = parseInt(localStorage.getItem("count1"));
@@ -85,8 +75,6 @@ $(document).ready(function() {
 
         let haveAlreadyAnswered = false;
         $('#areaP1').on('click', function (event) {
-
-
 
             if(!haveAlreadyAnswered){
                 $('#areaP1').css({'border': '3px solid #17C3B2'});
@@ -118,11 +106,6 @@ $(document).ready(function() {
                     window.location = "descriptionPage.html";
                 }, 2000);
             }
-        });
-    });
-    request.fail(
-        function(jqXHR, textStatus) {
-            alert( "Request failed: " + textStatus );
         });
     }
 });

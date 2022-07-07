@@ -32,21 +32,10 @@ $(document).ready(function(){
         });
 
         function getQuestionsNumber() {
-            return new Promise((resolve, reject)=>{
-                let request = $.ajax({
-                    url: "server/actions.php",
-                    type: "POST",
-                    data: {"action" : 'count'},
-                    dataTypes: "json",
+            return new Promise((resolve)=>{
+                $.getJSON("artapplication.json", function(json) {
+                    resolve(json[1].data.length);
                 });
-                request.done(function (data){
-                    console.log(data);
-                    resolve(parseInt(data));
-                });
-                request.fail(
-                    function(jqXHR, textStatus) {
-                        reject("Request failed: " + textStatus );
-                    });
             });
         }
     });

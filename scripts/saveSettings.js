@@ -9,7 +9,6 @@ $(document).ready(function(){
         preloadAllImages();
     }
     localStorage.setItem("isInitialized", isInitialized);
-
     $("#play_button").click(function(){
         let player1 = document.getElementById("name1").value;
         localStorage.setItem("player1", player1);
@@ -40,21 +39,10 @@ $(document).ready(function(){
             });
 
             function getQuestionsNumber() {
-                return new Promise((resolve, reject)=>{
-                    let request = $.ajax({
-                        url: "server/actions.php",
-                        type: "POST",
-                        data: {"action" : 'count'},
-                        dataTypes: "json",
+                return new Promise((resolve)=>{
+                    $.getJSON("artapplication.json", function(json) {
+                        resolve(json[1].data.length);
                     });
-                    request.done(function (data){
-                        console.log(data);
-                        resolve(parseInt(data));
-                    });
-                    request.fail(
-                        function(jqXHR, textStatus) {
-                            reject("Request failed: " + textStatus );
-                        });
                 });
             }
         }
@@ -62,24 +50,18 @@ $(document).ready(function(){
     function preloadAllImages() {
         const width = $(window).width();
 
-        let request = $.ajax({
-            url: "server/actions.php",
-            type: "POST",
-            data: {"action" : "getAllImages"},
-            dataTypes: "json",
-        });
-        request.done(function (data){
-            console.log(data['data']);
-            $(data['data']).each(function (index, object) {
-                console.log('preloading '+ object['lr-link']);
-                let imageLink = object['lr-link'];
-                if ((width >= 2 * object['lr-width']) && (width < 2 * object['mr-width'])) {
-                    imageLink = object['mr-link'];
-                } else if (width >= 2 * object['mr-width']) {
-                    imageLink = object['hr-link'];
+        $.getJSON("artapplication.json", function(json) {
+            let images = json[0].data;
+            $.each(images, function (index, val){
+                let imageLink = val['low-res_link'];
+                if ((width >= 2 * val['low-res_width']) && (width < 2 * val['mid-res_width'])) {
+                    imageLink = val['mid-res_link'];
+                } else if (width >= 2 * val['mid-res_width']) {
+                    imageLink = val['high-res_link'];
                 }
                 $('<img/>')[0].src = imageLink;
             });
         });
+
     }
 });
