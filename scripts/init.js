@@ -61,6 +61,9 @@ $(document).ready(function() {
 
         });
 
+        document.getElementById("playername1").innerHTML = localStorage.getItem("player1");
+        document.getElementById("playername2").innerHTML = localStorage.getItem("player2");
+
         let counter1 = parseInt(localStorage.getItem("count1"));
         if(isNaN(counter1)) {
             counter1 = 0;

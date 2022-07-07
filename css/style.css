@@ -102,6 +102,19 @@ h1{
 
 }
 
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.playernames,
+.pointCounter{
+    flex-direction: column;
+
+}
+
+
+
 .imageBox{
     width: 100%;
     position: relative;
