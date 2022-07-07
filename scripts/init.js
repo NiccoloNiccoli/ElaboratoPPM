@@ -61,20 +61,27 @@ $(document).ready(function() {
 
         });
 
-        document.getElementById("playername1").innerHTML = localStorage.getItem("player1");
-        document.getElementById("playername2").innerHTML = localStorage.getItem("player2");
+        let elements1 = document.getElementsByClassName("playername1");
+        for(let i = 0; i < elements1.length; i++) {
+            elements1[i].innerHTML = localStorage.getItem("player1");
+        }
+
+        let elements2 = document.getElementsByClassName("playername2");
+        for(let i = 0; i < elements2.length; i++) {
+            elements2[i].innerHTML = localStorage.getItem("player2");
+        }
 
         let counter1 = parseInt(localStorage.getItem("count1"));
         if(isNaN(counter1)) {
             counter1 = 0;
         }
-        document.getElementById("points1").innerHTML = counter1.toString();
+        document.getElementsByClassName("points1").innerHTML = counter1.toString();
 
         let counter2 = parseInt(localStorage.getItem("count2"));
         if(isNaN(counter2)) {
             counter2 = 0;
         }
-        document.getElementById("points2").innerHTML = counter2.toString();
+        document.getElementsByClassName("points2").innerHTML = counter2.toString();
 
         let haveAlreadyAnswered = false;
         $('#areaP1').on('click', function (event) {
@@ -87,7 +94,7 @@ $(document).ready(function() {
                 }
                 c1++;
                 localStorage.setItem("count1", c1.toString());
-                document.getElementById("points1").innerHTML = c1.toString();
+                document.getElementsByClassName("points1").innerHTML = c1.toString();
                 haveAlreadyAnswered = true;
                 setTimeout(function(){
                     window.location = "descriptionPage.html";
@@ -103,7 +110,7 @@ $(document).ready(function() {
                 }
                 c2++;
                 localStorage.setItem("count2", c2.toString());
-                document.getElementById("points2").innerHTML = c2.toString();
+                document.getElementsByClassName("points2").innerHTML = c2.toString();
                 haveAlreadyAnswered = true;
                 setTimeout(function () {
                     window.location = "descriptionPage.html";
