@@ -21,7 +21,7 @@ $(document).ready(function(){
         localStorage.setItem("rounds", localStorage.getItem("selectedRounds"));
         let rounds = localStorage.getItem("rounds");
         getQuestionsNumber().then((questionsNumber)=>{
-            let selectedQuestions = [...Array(questionsNumber).keys()].map( i => i+1).sort(() => 0.5 - Math.random()).slice(0, rounds);
+            let selectedQuestions = [...Array(questionsNumber).keys()].sort(() => 0.5 - Math.random()).slice(0, rounds);
             console.log(selectedQuestions);
             localStorage.setItem("questionsIDs", JSON.stringify(selectedQuestions));
             window.location = "mainPage.html";

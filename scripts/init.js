@@ -1,7 +1,4 @@
 $(document).ready(function() {
-    setTimeout(function () {
-        $("#tmpDiv").css({"display":"none"});
-    }, 3000);
     const width = $(window).width();
     let timer = (localStorage.getItem("timer") === 'true');
     const time = 20;
