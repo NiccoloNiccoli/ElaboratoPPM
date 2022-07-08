@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    let currentRound = parseInt(localStorage.getItem("selectedRounds")) - parseInt(localStorage.getItem("rounds")) + 1;
+    $("#currentRound").html(currentRound.toString());
+    $("#totalRounds").html(localStorage.getItem("selectedRounds"));
     const width = $(window).width();
     let timer = (localStorage.getItem("timer") === 'true');
     const time = 20;
@@ -112,7 +115,7 @@ $(document).ready(function() {
                 }
                 c1++;
                 localStorage.setItem("count1", c1.toString());
-                document.getElementsByClassName("points1").innerHTML = c1.toString();
+                $(".points1").html(c1.toString());
                 haveAlreadyAnswered = true;
                 setTimeout(function(){
                     window.location = "descriptionPage.html";
@@ -128,7 +131,7 @@ $(document).ready(function() {
                 }
                 c2++;
                 localStorage.setItem("count2", c2.toString());
-                document.getElementsByClassName("points2").innerHTML = c2.toString();
+                $(".points2").html(c2.toString());
                 haveAlreadyAnswered = true;
                 setTimeout(function () {
                     window.location = "descriptionPage.html";
