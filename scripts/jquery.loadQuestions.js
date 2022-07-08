@@ -1,0 +1,6 @@
+//SE IL BROWSER NON CARICA I CAMBIAMENTI È NECESSARIO APRIRE LA CONSOLE, ANDARE IN NETWORK E DISABILITARE LA CACHE
+(function ($){
+    $.fn.loadQuestions = function (){
+
+    }
+})(jQuery);
