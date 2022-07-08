@@ -71,7 +71,7 @@ h1{
 #return_button{
     background-color: var(--detail-color);/* #4CAF50; Green */
     color: var(--text-color);
-    padding: 1% 2%;
+    padding: 1vh 2vw;
     text-decoration: none;
     display: inline-block;
     font-size: 3em;
@@ -83,7 +83,7 @@ h1{
 }
 
 #nextRound_button{
-    font-size: 1rem;
+    font-size: 2em;
 }
 #play_button{
     margin-left: 35%;
@@ -103,13 +103,11 @@ h1{
 /*mainPage.html*/
 .mainImg{
     max-width: 100%;
-
 }
 
 .header{
     display: flex;
     justify-content: space-between;
-    margin: 0 2.5% 0 2.5%;
 }
 
 .playerNames,
@@ -139,9 +137,9 @@ h1{
 
 .question{
     font-weight: 800;
-  background-color: var(--background-color);
-  margin: 0 10px 0 10px;
-  text-align: center;
+    background-color: var(--background-color);
+    margin: 0 10px 0 10px;
+    text-align: center;
     padding:5px 0 5px 0;
     font-size: 24px;
 }
@@ -151,18 +149,11 @@ h1{
     flex: 1 1 auto;
 }
 
-#player1, #player2{
+.player1, .player2{
     width: 49%;
     display: flex;
     flex-direction: column;
-    padding:0 0.5% 0 0.5%;
-}
-
-#player1{
-    background-color: var(--background-color);
-}
-
-#player2{
+    padding:0 0.5%;
     background-color: var(--background-color);
 }
 
@@ -179,9 +170,8 @@ h1{
     background: linear-gradient(to top, var(--win-color-variant), var(--win-color));
     height:100%;
     width: 100%;
-
-
 }
+
 /* descriptionPage.html */
 #descriptionPageContent{
     display: flex;
@@ -190,28 +180,42 @@ h1{
     justify-content: center;
 }
 
-#descriptionPageImgContainer{
-    margin: 10px 0 10px 0;
+#infoRound{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #BFBBB4;
-}
-#descriptionPageImg{
-    height: 45vh;
+
 }
 
-#infoLeft, #infoRight{
+#ImgContainer,
+#descriptionPageContent .player1{
+    flex-direction: column;
+    width: 49vw;
+    margin: auto 2%;
+    /*padding-left: 15%;*/
+    justify-content: center;
+}
+
+#descriptionPageImgContainer{
+    background-color: red;
+    padding-left: 4%;
+    width: 49vw;
+}
+
+#descriptionPageContent .player1{
+    background-color: #87d2f3;
+}
+
+#descriptionPageImg{
+    max-height: 45vh;
+}
+
+#info{
     font-style: italic;
     display: inline-block;
 }
+
 .description{
     margin: 0 2% 10px 2%;
     padding-top: 10px;
-    height: 30vh;
-    overflow: auto;
 }
 /* finalPage.html */
 .finalPage{
