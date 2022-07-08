@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    setTimeout(function () {
+        $("#tmpDiv").css({"display":"none"});
+    }, 3000);
     const width = $(window).width();
     let timer = (localStorage.getItem("timer") === 'true');
     const time = 20;
@@ -21,46 +24,63 @@ $(document).ready(function() {
     loadImage();
 
 
-    function loadImage(){
+    function loadImage() {
         let questions = JSON.parse(localStorage.getItem("questionsIDs"));
         let id = questions.pop();
         localStorage.setItem("questionsIDs", JSON.stringify(questions));
+        console.log(questions, id);
 
-        $.getJSON("artapplication.json", function(json) {
-            let images = json[0].data;
-            $.each(images, function (index, val){
-                $('.question').html(val['question']);
-                let imageLink = val['low-res_link'];
-                if ((width >= 2 * val['low-res_width']) && (width < 2 * val['mid-res_width'])) {
-                    imageLink = val['mid-res_link'];
-                } else if (width >= 2 * val['mid-res_width']) {
-                    imageLink = val['high-res_link'];
-                }
-
-                const loadImagesAndWait = ms=> new Promise(resolve => {
-                    $('.mainImg').attr("src",imageLink);
-                    setTimeout(resolve, ms);
-                })
-
-                loadImagesAndWait(65).then(()=>{
-                    const imgDivWidth = $('.imageBox').width();
-                    const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height();
-                    if($('.mainImg').height() > $('.mainImg').width()){
-                        $('.mainImg').css({"height":imgDivHeight, "width":"auto"});
-                    }else{
-                        $('.mainImg').css({"height":"auto", "width":imgDivWidth});
-                    }
-                    $('.imageBox').css({"height":$('.mainImg').height(), "width":$('.mainImg').width()});
+        function loadDataFromJSON() {
+            return new Promise(resolve => {
+                $.getJSON("artapplication.json", function (json) {
+                    let imageQuestion = json[1].data[id];
+                    let imageData = $.grep(json[0].data, function (obj) {
+                        let returnValue;
+                        if (obj.name === imageQuestion.name && obj.author === imageQuestion.author) {
+                            returnValue = obj;
+                        }
+                        return returnValue;
+                    });
+                    resolve({"imageQuestion": imageQuestion, "imageData": imageData[0]});
                 });
 
-                let coords = val['coordinates'];
-                $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
-                const dataDesc = {"name" : val['name'], "author" : val['author'], "location" : val['location'], "year" : val['year'], "description" : val["description"], "image" : imageLink};
-                localStorage.setItem("desc", JSON.stringify(dataDesc));
+            });
+        }
+
+        loadDataFromJSON().then((r)=>{
+           console.log(r.imageQuestion, r.imageData);
+           console.log(r.imageData["low-res_link"]);
+            $('.question').html(r.imageQuestion['question']);
+            let imageLink = r.imageData['low-res_link'];
+            console.log(imageLink);
+            if ((width >= 2 * r.imageData['low-res_width']) && (width < 2 * r.imageData['mid-res_width'])) {
+                imageLink = r.imageData['mid-res_link'];
+            } else if (width >= 2 * r.imageData['mid-res_width']) {
+                imageLink = r.imageData['high-res_link'];
+            }
+
+            const loadImagesAndWait = ms=> new Promise(resolve => {
+                $('.mainImg').attr("src", imageLink);
+                setTimeout(resolve, ms);
             });
 
-        });
+            loadImagesAndWait(65).then(()=>{
+                const imgDivWidth = $('.imageBox').width();
+                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height();
+                if($('.mainImg').height() > $('.mainImg').width()){
+                    $('.mainImg').css({"height":imgDivHeight, "width":"auto"});
+                }else{
+                    $('.mainImg').css({"height":"auto", "width":imgDivWidth});
+                }
+                $('.imageBox').css({"height":$('.mainImg').height(), "width":$('.mainImg').width()});
 
+                let coords = JSON.parse(r.imageQuestion['coordinates']);
+                console.log('now area2click', Object.keys(coords));
+                $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
+                const dataDesc = {"name" : r.imageData['name'], "author" : r.imageData['author'], "location" : r.imageData['location'], "year" : r.imageData['year'], "description" : r.imageQuestion["description"], "image" : imageLink};
+                localStorage.setItem("desc", JSON.stringify(dataDesc));
+            });
+        });
         let elements1 = document.getElementsByClassName("playername1");
         for(let i = 0; i < elements1.length; i++) {
             elements1[i].innerHTML = localStorage.getItem("player1");
@@ -75,19 +95,20 @@ $(document).ready(function() {
         if(isNaN(counter1)) {
             counter1 = 0;
         }
-        document.getElementsByClassName("points1").innerHTML = counter1.toString();
+        $(".points1").html(counter1);
+        console.log("points1",counter1);
 
         let counter2 = parseInt(localStorage.getItem("count2"));
         if(isNaN(counter2)) {
             counter2 = 0;
         }
-        document.getElementsByClassName("points2").innerHTML = counter2.toString();
+        $(".points2").html(counter2);
 
         let haveAlreadyAnswered = false;
         $('#areaP1').on('click', function (event) {
 
             if(!haveAlreadyAnswered){
-                $('#areaP1').css({'border': '3px solid #17C3B2'});
+                $('#areaP1').css({'border': '3px solid #3398d7'});
                 let c1 = parseInt(localStorage.getItem("count1"));
                 if(isNaN(c1)) {
                     c1 = 0;
@@ -103,7 +124,7 @@ $(document).ready(function() {
         });
         $('#areaP2').on('click', function (event) {
             if(!haveAlreadyAnswered) {
-                $('#areaP2').css({'border': '3px solid #17C3B2'});
+                $('#areaP2').css({'border': '3px solid #3398d7'});
                 let c2 = parseInt(localStorage.getItem("count2"));
                 if (isNaN(c2)) {
                     c2 = 0;

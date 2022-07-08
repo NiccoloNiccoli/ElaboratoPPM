@@ -15,4 +15,26 @@ $(document).ready(function(){
    else{
       document.getElementById("nextRound_link").href="finalPage.html";
    }
+
+   let elements1 = document.getElementsByClassName("playername1");
+   for(let i = 0; i < elements1.length; i++) {
+      elements1[i].innerHTML = localStorage.getItem("player1");
+   }
+
+   let elements2 = document.getElementsByClassName("playername2");
+   for(let i = 0; i < elements2.length; i++) {
+      elements2[i].innerHTML = localStorage.getItem("player2");
+   }
+
+   let counter1 = parseInt(localStorage.getItem("count1"));
+   if(isNaN(counter1)) {
+      counter1 = 0;
+   }
+   $(".points1").html(counter1);
+
+   let counter2 = parseInt(localStorage.getItem("count2"));
+   if(isNaN(counter2)) {
+      counter2 = 0;
+   }
+   $(".points2").html(counter2);
 });
