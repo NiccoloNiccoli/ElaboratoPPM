@@ -10,7 +10,7 @@
 }
 
 html{
-    font-size: 1.5rem;
+    font-size: 3vh;
     font-family: Lato, sans-serif;
     color:var(--text-color);
 }
@@ -25,6 +25,7 @@ body{
 p{
     margin: 0;
 }
+
 /*index.html*/
 #name1, #name2, #selection, #timer{
     font-size: 1rem;
@@ -35,7 +36,7 @@ h1{
     color: var(--text-color);
     font-family: Dosis, sans-serif;
     font-weight: 900;
-    font-size: 4rem;
+    font-size: 10vh;
 }
 .splashScreen{
     display: flex;
@@ -70,10 +71,10 @@ h1{
 #return_button{
     background-color: var(--detail-color);/* #4CAF50; Green */
     color: var(--text-color);
-    padding: 15px 32px;
+    padding: 1% 2%;
     text-decoration: none;
     display: inline-block;
-    font-size: 3rem;
+    font-size: 3em;
     margin: auto;
     font-family: Dosis, sans-serif;
     font-weight: 700;
@@ -96,7 +97,7 @@ h1{
 .timer_checkbox,
 #play_button,
 #nextRound_button{
-    margin-bottom: 2%;
+    margin-bottom: 3%;
 }
 
 /*mainPage.html*/
