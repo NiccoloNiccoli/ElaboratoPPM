@@ -1,7 +1,7 @@
 $(document).ready(function() {
     let currentRound = parseInt(localStorage.getItem("selectedRounds")) - parseInt(localStorage.getItem("rounds")) + 1;
-    $("#currentRound").html(currentRound.toString());
-    $("#totalRounds").html(localStorage.getItem("selectedRounds"));
+    $(".currentRound").html(currentRound.toString());
+    $(".totalRounds").html(localStorage.getItem("selectedRounds"));
     const width = $(window).width();
     let timer = (localStorage.getItem("timer") === 'true');
     const time = 20;
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
             loadImagesAndWait(65).then(()=>{
                 const imgDivWidth = $('.imageBox').width();
-                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height() - $('#roundCounter').height();
+                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height() - $('.roundCounter').height();
                 let newHeight = $('.mainImg').height() * imgDivWidth/$('.mainImg').width();
                 if($('.mainImg').height() > $('.mainImg').width() || newHeight>imgDivHeight){
                     $('.mainImg').css({"height":imgDivHeight, "width":"auto"});

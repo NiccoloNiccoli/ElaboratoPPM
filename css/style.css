@@ -38,6 +38,14 @@ h1{
     font-weight: 900;
     font-size: 10vh;
 }
+
+h2{
+    color: var(--text-color);
+    font-family: Dosis, sans-serif;
+    font-weight: 700;
+    font-size: 8vh;
+}
+
 .splashScreen{
     display: flex;
     flex-direction: column;
@@ -69,7 +77,7 @@ h1{
 #nextRound_button,
 #playAgain_button,
 #return_button{
-    background-color: var(--detail-color);/* #4CAF50; Green */
+    background-color: var(--detail-color);
     color: var(--text-color);
     padding: 1vh 2vw;
     text-decoration: none;
@@ -80,6 +88,11 @@ h1{
     font-weight: 700;
     border: 2px solid transparent;
     border-radius: 20px;
+}
+
+#playAgain_button,
+#return_button{
+
 }
 
 #nextRound_button{
@@ -107,7 +120,8 @@ h1{
 
 .header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-bottom: 2vh;
 }
 
 .playerNames,
@@ -137,7 +151,6 @@ h1{
 
 .question{
     font-weight: 800;
-    background-color: var(--background-color);
     margin: 0 10px 0 10px;
     text-align: center;
     padding:5px 0 5px 0;
@@ -145,8 +158,9 @@ h1{
 }
 
 .players{
-  display: flex;
+    display: flex;
     flex: 1 1 auto;
+    font-weight: 600;
 }
 
 .player1, .player2{
@@ -172,6 +186,25 @@ h1{
     width: 100%;
 }
 
+.circle{
+    width: 300px;
+    height: 300px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    border-radius: 150px;
+    background: var(--detail-color);
+    margin-top: -270px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.roundCounter{
+    margin-top: -35px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    font-weight: 500;
+}
 /* descriptionPage.html */
 #descriptionPageContent{
     display: flex;
@@ -182,30 +215,23 @@ h1{
 
 #infoRound{
     display: flex;
-
 }
 
 #ImgContainer,
 #descriptionPageContent .player1{
     flex-direction: column;
-    width: 49vw;
-    margin: auto 2%;
-    /*padding-left: 15%;*/
+    width: 50vw;
+    margin: auto 5vw;
     justify-content: center;
 }
 
 #descriptionPageImgContainer{
-    background-color: red;
-    padding-left: 4%;
-    width: 49vw;
-}
-
-#descriptionPageContent .player1{
-    background-color: #87d2f3;
+    width: 30vw;
 }
 
 #descriptionPageImg{
     max-height: 45vh;
+    max-width: 30vw;
 }
 
 #info{
@@ -230,12 +256,13 @@ h1{
 
 .buttons{
     display: flex;
+    justify-content: space-evenly;
 }
 
 .button1,
 .button2{
     flex-direction: column;
-    margin: auto;
+    width: 30vw;
 }
 
 
