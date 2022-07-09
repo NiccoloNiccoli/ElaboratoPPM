@@ -1,6 +1,9 @@
 $(document).ready(function(){
    let rounds = parseInt(localStorage.getItem("rounds")) - 1;
    localStorage.setItem("rounds", rounds.toString());
+   let currentRound = parseInt(localStorage.getItem("selectedRounds")) - rounds;
+   $("#currentRound").html(currentRound.toString());
+   $("#totalRounds").html(localStorage.getItem("selectedRounds"));
    let infos = JSON.parse(localStorage.getItem("desc"));
    console.log(infos);
    $('#descriptionPageImgContainer').html("<img id='descriptionPageImg' src=" + infos["image"] + "><div id='infoLeft'><span id='title'></span> - <span id='author'></span></div><div id='infoRight'><span id='location'></span>, <span id='year'></span></div>");

@@ -66,8 +66,9 @@ $(document).ready(function() {
 
             loadImagesAndWait(65).then(()=>{
                 const imgDivWidth = $('.imageBox').width();
-                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height();
-                if($('.mainImg').height() > $('.mainImg').width()){
+                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height() - $('#roundCounter').height();
+                let newHeight = $('.mainImg').height() * imgDivWidth/$('.mainImg').width();
+                if($('.mainImg').height() > $('.mainImg').width() || newHeight>imgDivHeight){
                     $('.mainImg').css({"height":imgDivHeight, "width":"auto"});
                 }else{
                     $('.mainImg').css({"height":"auto", "width":imgDivWidth});
