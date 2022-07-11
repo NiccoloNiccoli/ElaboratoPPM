@@ -66,10 +66,10 @@ $(document).ready(function() {
 
             loadImagesAndWait(65).then(()=>{
                 const imgDivWidth = $('.imageBox').width();
-                const imgDivHeight = $(window).height() - $('.question').height() - $('.header').height() - $('.timer').height() - $('.roundCounter').height();
+                const imgDivHeight = $(window).height() - $('.question').outerHeight() - $('.header').outerHeight() - $('.timer').outerHeight() - $('.roundCounter').outerHeight();
                 let newHeight = $('.mainImg').height() * imgDivWidth/$('.mainImg').width();
                 if($('.mainImg').height() > $('.mainImg').width() || newHeight>imgDivHeight){
-                    $('.mainImg').css({"height":imgDivHeight, "width":"auto"});
+                    $('.mainImg').css({"height":Math.round(imgDivHeight*0.95).toString(), "width":"auto"});
                 }else{
                     $('.mainImg').css({"height":"auto", "width":imgDivWidth});
                 }
