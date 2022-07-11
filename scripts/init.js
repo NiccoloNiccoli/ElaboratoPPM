@@ -2,6 +2,7 @@ $(document).ready(function() {
     let currentRound = parseInt(localStorage.getItem("selectedRounds")) - parseInt(localStorage.getItem("rounds")) + 1;
     $(".currentRound").html(currentRound.toString());
     $(".totalRounds").html(localStorage.getItem("selectedRounds"));
+    document.title = "Round "+currentRound.toString()+"/"+localStorage.getItem("selectedRounds")+" - Dov'è?";
     const width = $(window).width();
     let timer = (localStorage.getItem("timer") === 'true');
     const time = 20;
@@ -69,7 +70,7 @@ $(document).ready(function() {
                 const imgDivHeight = $(window).height() - $('.question').outerHeight() - $('.header').outerHeight() - $('.timer').outerHeight() - $('.roundCounter').outerHeight();
                 let newHeight = $('.mainImg').height() * imgDivWidth/$('.mainImg').width();
                 if($('.mainImg').height() > $('.mainImg').width() || newHeight>imgDivHeight){
-                    $('.mainImg').css({"height":Math.round(imgDivHeight*0.95).toString(), "width":"auto"});
+                    $('.mainImg').css({"height":Math.round(imgDivHeight*0.90).toString(), "width":"auto"});
                 }else{
                     $('.mainImg').css({"height":"auto", "width":imgDivWidth});
                 }

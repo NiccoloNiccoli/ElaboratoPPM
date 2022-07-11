@@ -30,8 +30,6 @@ $(document).ready(function(){
         else{
             getQuestionsNumber().then((questionsNumber)=>{
                 let selectedQuestions = [...Array(questionsNumber).keys()].sort(() => 0.5 - Math.random()).slice(0, rounds);
-
-                console.log(selectedQuestions);
                 localStorage.setItem("questionsIDs", JSON.stringify(selectedQuestions));
                 window.location = "mainPage.html";
             }).catch((error)=>{

@@ -10,6 +10,7 @@ $(document).ready(function(){
    $('.description').html(infos["description"]);
    $('#title').html(infos['name']);
    $('#author').html(infos['author']);
+   document.title = infos['name']+" - Dov'è?";
    $('#location').html(infos['location']);
    $('#year').html(infos['year']);
    if (rounds !== 0) {

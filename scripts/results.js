@@ -9,20 +9,21 @@ $(document).ready(function(){
     }
     if(counter1 === counter2){
         document.getElementById("winner").innerHTML = "PAREGGIO!";
+        document.title = 'Pareggio!';
     }
     else if (counter2>counter1){
         document.getElementById("winner").innerHTML = "CONGRATULAZONI " + localStorage.getItem("player2") + " HAI VINTO!";
+        document.title = 'Congratulazioni '+localStorage.getItem("player2")+"!";
     }
     else if(counter1>counter2){
         document.getElementById("winner").innerHTML = "CONGRATULAZONI " + localStorage.getItem("player1") + " HAI VINTO!";
+        document.title = 'Congratulazioni '+localStorage.getItem("player1")+"!";
     }
-    
     $("#playAgain_button").click(function () {
         localStorage.setItem("rounds", localStorage.getItem("selectedRounds"));
         let rounds = localStorage.getItem("rounds");
         getQuestionsNumber().then((questionsNumber)=>{
             let selectedQuestions = [...Array(questionsNumber).keys()].sort(() => 0.5 - Math.random()).slice(0, rounds);
-            console.log(selectedQuestions);
             localStorage.setItem("questionsIDs", JSON.stringify(selectedQuestions));
             window.location = "mainPage.html";
             localStorage.setItem("count1", "NaN");
