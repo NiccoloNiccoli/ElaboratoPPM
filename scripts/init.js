@@ -33,7 +33,6 @@ $(document).ready(function() {
         let questions = JSON.parse(localStorage.getItem("questionsIDs"));
         let id = questions.pop();
         localStorage.setItem("questionsIDs", JSON.stringify(questions));
-        console.log(questions, id);
 
         function loadDataFromJSON() {
             return new Promise(resolve => {
@@ -53,11 +52,8 @@ $(document).ready(function() {
         }
 
         loadDataFromJSON().then((r)=>{
-           console.log(r.imageQuestion, r.imageData);
-           console.log(r.imageData["low-res_link"]);
             $('.question').html(r.imageQuestion['question']);
             let imageLink = r.imageData['low-res_link'];
-            console.log(imageLink);
             if ((width >= 2 * r.imageData['low-res_width']) && (width < 2 * r.imageData['mid-res_width'])) {
                 imageLink = r.imageData['mid-res_link'];
             } else if (width >= 2 * r.imageData['mid-res_width']) {
@@ -81,7 +77,6 @@ $(document).ready(function() {
                 $('.imageBox').css({"height":$('.mainImg').height(), "width":$('.mainImg').width()});
 
                 let coords = JSON.parse(r.imageQuestion['coordinates']);
-                console.log('now area2click', Object.keys(coords));
                 $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
                 const dataDesc = {"name" : r.imageData['name'], "author" : r.imageData['author'], "location" : r.imageData['location'], "year" : r.imageData['year'], "description" : r.imageQuestion["description"], "image" : imageLink};
                 localStorage.setItem("desc", JSON.stringify(dataDesc));
@@ -102,7 +97,6 @@ $(document).ready(function() {
             counter1 = 0;
         }
         $(".points1").html(counter1);
-        console.log("points1",counter1);
 
         let counter2 = parseInt(localStorage.getItem("count2"));
         if(isNaN(counter2)) {
