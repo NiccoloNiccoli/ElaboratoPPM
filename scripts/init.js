@@ -16,7 +16,11 @@ $(document).ready(function() {
             }else{
                 clearInterval(startTimer);
                 $("#timeLeft").css({"width" : "0%"});
-                window.location = "descriptionPage.html";
+                $('#areaP1').css({'border': '4px solid #d73346'});
+                $('#areaP2').css({'border': '4px solid #d73346'});
+                setTimeout(function(){
+                    window.location = "descriptionPage.html";
+                }, 2000);
             }
         }, 10);
     }else{
