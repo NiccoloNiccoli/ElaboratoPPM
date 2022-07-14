@@ -27,16 +27,37 @@ p{
 }
 
 /*index.html*/
+#appDescription{
+    text-align: center;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
 #name1, #name2, #selection, #timer{
-    font-size: 1rem;
+    font-size: 1.3rem;
     margin: 0 5px 0 5px;
 }
 
+input[type=checkbox] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+.timer_checkbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#timerLabel{
+    margin-left: 0.7%;
+}
 h1{
     color: var(--text-color);
     font-family: Dosis, sans-serif;
     font-weight: 900;
-    font-size: 10vh;
+    font-size: 15vh;
+    margin-bottom:1%;
+    margin-top: 1%;
 }
 
 h2{
@@ -54,6 +75,7 @@ h2{
 .gameName{
     text-align: center;
     margin-top: 2%;
+    margin-bottom:5%;
 }
 
 .playersNames{
@@ -71,6 +93,7 @@ h2{
 #play_button,
 #nextRound_button{
     text-align: center;
+
 }
 
 #play_button,
@@ -104,7 +127,6 @@ h2{
     width: 30%;
 }
 
-.gameName,
 .playersNames,
 #rounds,
 .timer_checkbox,
