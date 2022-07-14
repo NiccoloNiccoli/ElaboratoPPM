@@ -113,7 +113,7 @@ $(document).ready(function() {
         $('#imgP1').on("click", function() {
             if(!haveAlreadyAnswered && strikes1 > 0) {
                 $('#strike'+strikes1+'_P1').attr("src", "src/cross-small.svg");
-                $('#strike'+strikes1+'_P1').css({'filter':'filter: invert(31%) sepia(74%) saturate(1679%) hue-rotate(327deg) brightness(85%) contrast(99%)'});
+                $('#strike'+strikes1+'_P1').css({'filter':'invert(31%) sepia(74%) saturate(1679%) hue-rotate(327deg) brightness(85%) contrast(99%)'});
                 strikes1--;
                 if (strikes1 === 0 && strikes2 === 0){
                     $('#areaP1').css({'border': '4px solid #d73346'});
@@ -128,7 +128,7 @@ $(document).ready(function() {
         $('#imgP2').on("click", function() {
             if(!haveAlreadyAnswered && strikes2 > 0) {
                 $('#strike'+strikes2+'_P2').attr("src", "src/cross-small.svg");
-                $('#strike'+strikes2+'_P2').css({'filter':'filter: invert(31%) sepia(74%) saturate(1679%) hue-rotate(327deg) brightness(85%) contrast(99%)'});
+                $('#strike'+strikes2+'_P2').css({'filter':'invert(31%) sepia(74%) saturate(1679%) hue-rotate(327deg) brightness(85%) contrast(99%)'});
                 strikes2--;
                 if (strikes1 === 0 && strikes2 === 0){
                     $('#areaP1').css({'border': '4px solid #d73346'});
