@@ -3,6 +3,8 @@ $(document).ready(function() {
     $(".currentRound").html(currentRound.toString());
     $(".totalRounds").html(localStorage.getItem("selectedRounds"));
     document.title = "Round "+currentRound.toString()+"/"+localStorage.getItem("selectedRounds")+" - Dov'è?";
+    let strikes1 = 3;
+    let strikes2 = 3;
     const width = $(window).width();
     let timer = (localStorage.getItem("timer") === 'true');
     const time = 20;
@@ -77,6 +79,7 @@ $(document).ready(function() {
                 $('.imageBox').css({"height":$('.mainImg').height(), "width":$('.mainImg').width()});
 
                 let coords = JSON.parse(r.imageQuestion['coordinates']);
+                localStorage.setItem("coords", "coords");
                 $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
                 const dataDesc = {"name" : r.imageData['name'], "author" : r.imageData['author'], "location" : r.imageData['location'], "year" : r.imageData['year'], "description" : r.imageQuestion["description"], "image" : imageLink};
                 localStorage.setItem("desc", JSON.stringify(dataDesc));
@@ -105,9 +108,38 @@ $(document).ready(function() {
         $(".points2").html(counter2);
 
         let haveAlreadyAnswered = false;
-        $('#areaP1').on('click', function (event) {
 
-            if(!haveAlreadyAnswered){
+
+        $('#imgP1').on("click", function() {
+            if(!haveAlreadyAnswered && strikes1 > 0) {
+                strikes1--;
+                alert(strikes1);
+                if (strikes1 === 0 && strikes2 === 0){
+                    $('#areaP1').css({'border': '4px solid #d73346'});
+                    $('#areaP2').css({'border': '4px solid #d73346'});
+                    setTimeout(function(){
+                        window.location = "descriptionPage.html";
+                    }, 2000);
+                }
+            }
+        });
+
+        $('#imgP2').on("click", function() {
+            if(!haveAlreadyAnswered && strikes2 > 0) {
+                strikes2--;
+                alert(strikes2);
+                if (strikes1 === 0 && strikes2 === 0){
+                    $('#areaP1').css({'border': '4px solid #d73346'});
+                    $('#areaP2').css({'border': '4px solid #d73346'});
+                    setTimeout(function(){
+                        window.location = "descriptionPage.html";
+                    }, 2000);
+                }
+            }
+        });
+
+        $('#areaP1').on('click', function () {
+            if(!haveAlreadyAnswered && strikes1 > 0){
                 $('#areaP1').css({'border': '4px solid #d73346'});
                 let c1 = parseInt(localStorage.getItem("count1"));
                 if(isNaN(c1)) {
@@ -122,8 +154,8 @@ $(document).ready(function() {
                 }, 2000);
             }
         });
-        $('#areaP2').on('click', function (event) {
-            if(!haveAlreadyAnswered) {
+        $('#areaP2').on('click', function () {
+            if(!haveAlreadyAnswered && strikes2 > 0) {
                 $('#areaP2').css({'border': '4px solid #d73346'});
                 let c2 = parseInt(localStorage.getItem("count2"));
                 if (isNaN(c2)) {
