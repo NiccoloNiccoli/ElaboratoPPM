@@ -83,6 +83,9 @@ $(document).ready(function() {
                 $('.areaToClick').css({'top' : coords['top'], 'right' : coords['right'], 'bottom' : coords['bottom'], 'left' : coords['left']});
                 const dataDesc = {"name" : r.imageData['name'], "author" : r.imageData['author'], "location" : r.imageData['location'], "year" : r.imageData['year'], "description" : r.imageQuestion["description"], "image" : imageLink};
                 localStorage.setItem("desc", JSON.stringify(dataDesc));
+
+                const headerShrinkingPercentage = $('.imageBox').width()/$('.player2').width()*100;
+                $('.header').css({'width': headerShrinkingPercentage+'%'});
             });
         });
         let elements1 = document.getElementsByClassName("playername1");

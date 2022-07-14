@@ -30,7 +30,7 @@ p{
 #appDescription{
     text-align: center;
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 #name1, #name2, #selection, #timer{
@@ -74,13 +74,17 @@ h2{
 
 .gameName{
     text-align: center;
-    margin-top: 2%;
     margin-bottom:5%;
 }
 
 .playersNames{
     display: flex;
 }
+.playersNames, #rounds, .timer_checkbox{
+    font-size: 1.6rem;
+    font-weight: 450;
+}
+
 
 .playerName{
     flex-direction: column;
@@ -144,6 +148,12 @@ h2{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 2vh auto;
+}
+.header_desc{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     margin: 2vh 0;
 }
 
@@ -154,6 +164,7 @@ h2{
 }
 .playerNames{
     margin-right: auto;
+    font-weight: 800;
 }
 .pointCounter{
     margin-left: auto;
@@ -196,7 +207,7 @@ h2{
     margin: 0 10px 0 10px;
     text-align: center;
     padding:5px 0 5px 0;
-    font-size: 36px;
+    font-size: 42px;
 }
 
 .players{
@@ -245,7 +256,7 @@ h2{
     margin-left: auto;
     margin-right: auto;
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 /* descriptionPage.html */
@@ -270,6 +281,7 @@ h2{
 
 #descriptionPageImgContainer{
     width: 30vw;
+    font-style: italic;
 }
 
 #descriptionPageImg{
