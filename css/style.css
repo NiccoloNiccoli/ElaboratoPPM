@@ -143,14 +143,34 @@ h2{
 .header{
     display: flex;
     justify-content: space-around;
-    margin-bottom: 2vh;
+    align-items: center;
+    margin: 2vh 0;
 }
 
 .playerNames,
 .pointCounter{
+    max-width: 33%;
     flex-direction: column;
 }
+.playerNames{
+    margin-right: auto;
+}
+.pointCounter{
+    margin-left: auto;
+}
+.strikes{
+    display: flex;
+    width: 33%;
+    justify-content: center;
+}
+.strikes img{
+    height: 1rem;
+    width: auto;
+}
 
+#strike1_P1,#strike1_P2,#strike2_P1,#strike2_P2,#strike3_P1,#strike3_P2{
+    filter: invert(51%) sepia(98%) saturate(1293%) hue-rotate(176deg) brightness(91%) contrast(84%);
+}
 .imageBox{
     width: 100%;
     position: relative;
@@ -227,6 +247,7 @@ h2{
     font-size: 30px;
     font-weight: 500;
 }
+
 /* descriptionPage.html */
 #descriptionPageContent{
     display: flex;
